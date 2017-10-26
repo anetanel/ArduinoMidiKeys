@@ -3,6 +3,8 @@
 // include the library code:
 #include <LiquidCrystal.h>
 
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 #define KEY_LEFT_CTRL   0x01
 #define KEY_LEFT_SHIFT  0x02
@@ -15,13 +17,12 @@
 #define KEY_Y 0x1c
 #define KEY_COMB KEY_LEFT_CTRL + KEY_LEFT_ALT
 
-// initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
-//set number of emulators, names and shourtcut keys
+
+//set number of emulators, names and shortcut keys
 const int numOfEmulators = 4;
 String emulators[numOfEmulators] = {"MT-32", "CM-32L", "SC-55", "YAMAHA"};
-int shourtcutKey[numOfEmulators] = {KEY_M, KEY_C, KEY_S, KEY_Y};
+int shortcutKey[numOfEmulators] = {KEY_M, KEY_C, KEY_S, KEY_Y};
 
 int currentEmulator = 0;
 int activeEmulator = -100;
@@ -77,7 +78,7 @@ void loop() {
       delay(1000);
     }
     buf[0] = KEY_COMB;
-    buf[2] = shourtcutKey[currentEmulator];
+    buf[2] = shortcutKey[currentEmulator];
     Serial.write(buf, 8);
     releaseKey();
   }
